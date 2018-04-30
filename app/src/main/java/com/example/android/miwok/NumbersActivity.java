@@ -40,8 +40,6 @@ public class NumbersActivity extends AppCompatActivity {
                 R.drawable.number_nine, R.raw.number_nine));
         words.add(new Word("ten", "na'aacha",
                 R.drawable.number_ten, R.raw.number_ten));
-        words.add(new Word("eleven", "wo'elutti",
-                        R.drawable.number_ten, R.raw.number_ten));
 
 //        ArrayAdapter<Word> itemsAdapter = new ArrayAdapter<Word>(this, R.layout.list_item, words);
 //        ListView listView = (ListView) findViewById(R.id.list);
