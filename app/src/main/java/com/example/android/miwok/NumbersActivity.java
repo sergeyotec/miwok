@@ -14,6 +14,15 @@ public class NumbersActivity extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
 
+    //этот прослушиватель запускается, когда MediaPlayer завершил воспроизведение аудиофайла.
+    private MediaPlayer.OnCompletionListener mOnCompletionListener =
+            new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,16 +74,13 @@ public class NumbersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Word word = words.get(position);
+                //освобождаем медиаплеер перед нажатием на другой item
+                releaseMediaPlayer();
                 Log.i("numbersActivity", "текущее слово: " + word);
                 mMediaPlayer = MediaPlayer.create(NumbersActivity.this,
                         word.getAudioResourceId());
                 mMediaPlayer.start();
-                mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        releaseMediaPlayer();
-                    }
-                });
+                mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
             }
         });
     }
