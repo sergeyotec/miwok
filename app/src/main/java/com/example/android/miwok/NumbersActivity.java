@@ -84,6 +84,14 @@ public class NumbersActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //когда активность остановлена, освобождаем ресурсы MediaPlayer
+        releaseMediaPlayer();
+    }
+
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
         if (mMediaPlayer != null) {
